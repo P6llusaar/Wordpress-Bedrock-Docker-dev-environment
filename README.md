@@ -2,7 +2,7 @@
 
 A simple but powerfull Docker environment for bedrock devlopment based on the official Wordpress Docker image.
 
-**NB! The instructions and some of the scripts are still untested, I'll start development on a new wordpress site soon, so I should be able to test it all out very very soon. If you have any questions before that however, feel free to open an issue.**
+**NB! Some of the tools are still untested, altho they did work on another project before some minor modifications, so I'd assume they should work just fine.**
 
 
 ### What benefits does it have over the official wordpress image? 
@@ -31,7 +31,7 @@ I'm glad you asked :) .
     * group id: `id -g`
 1. In .env file replace the exiting user and group id-s with the ones you just retrieved
 1. If you already have another webserver on port 80 you need to change the port 80 into something else (if you have set up apache or nginx on your computer, then that's probably the case). Port 8080 is a good choice, if that is already taken 8081, 8082, ...
-1. Run `docker-compose up -d`
+1. Run `docker-compose up -d` (or `docker-compose up --build -d` if you want to rebuild it later)
 
 #### (Optional) If you want to automatically generate .po translation files: 
 1. Move updatePoFiles.sh from tools_disabled to tools.
@@ -49,6 +49,11 @@ If you want VSCode's terminal to connect to the container by default. Go to .vsc
 First off, if you need to run any wp-cli commands, you should do it within the container. The enviroment has built in composer so it might be easier to just run it's commands within the container as well. Use the docker VSCode terminal presets the environment comes with or run `exec -u www-data -it bedrock-dev /bin/bash` in terminal to enter the container.
 
 If you want to modify or add any of the scripts or mu-plugins the project comes with, feel free to do so. **Don't touch "load-original-mu-plugins.php" or mu-plugins of bedrock will stop working**. Changes to mu-plugins will take place immediately. You need to restart the the environment using the following command at the root of the project `docker-compose restart` (no need to rebuild). If you feel like that tool could also be helpful to others, feel free to open a pull request.
+
+### Some tool reccomendations
+* [Livereload plugin](https://chromewebstore.google.com/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei) - for Chrome/Edge (if your live-reload runs on a different port, you might need a different plugin)
+* [Edge tools for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-edgedevtools.vscode-edge-devtools) - enables you to open MS Edge dev tools in VSCode (inspect element etc.)
+* [PHP Debug (vscode plugin)](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug) - enables you to debug php applications in VSCode
 
 ### What if I don't want to use some of these scripts?
 No problem, just move that script/plugin from tools/mu-plugins to tools_disabled/mu-plugins_disabled. **NB! Make sure you don't move the "load-original-mu-plugins.php" plugin or your own/bedrocks mu-pluggins won't load anymore!**
