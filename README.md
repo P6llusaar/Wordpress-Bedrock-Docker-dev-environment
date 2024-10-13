@@ -41,6 +41,9 @@ If you want to make liveReload watch for changes in other folders as well, the r
 
 To change the default port change the left side of this port pair `- 35729:35729` in docker-compose.yaml
 
+#### (Optional) Changing the default terminal profile:
+If you want VSCode's terminal to connect to the container by default. Go to .vscode/settings.json and comment in or add `terminal.integrated.defaultProfile.linux": "docker",`. If you need to open a terminal in the host machine, pick another profile from the little arrow next to the plus button. **The downside is that if the environment isn't running no terminal at all can be opened. If that happens just uncomment that line and you should be able to open the terminal again.**
+
 ### Some words about development
 First off, if you need to run any wp-cli commands, you should do it within the container. The enviroment has built in composer so it might be easier to just run it's commands within the container as well. Use the docker VSCode terminal presets the environment comes with or run `exec -u www-data -it bedrock-dev /bin/bash` in terminal to enter the container.
 

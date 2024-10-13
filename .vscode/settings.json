@@ -13,5 +13,5 @@
           "args": ["exec", "-it", "bedrock-dev", "/bin/bash"]
         }
     },
-    "terminal.integrated.defaultProfile.linux": "docker",
+    //"terminal.integrated.defaultProfile.linux": "docker",
 }
