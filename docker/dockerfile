@@ -1,0 +1,30 @@
+FROM wordpress:6-php8.1
+
+ARG USER_ID
+ARG GROUP_ID
+
+COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
+
+#** dev
+ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN install-php-extensions @composer xdebug
+
+COPY docker/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+RUN apt-get update
+RUN apt-get install -y nodejs npm inotify-tools
+RUN npm install -g livereload
+
+RUN usermod -u $USER_ID -s /bin/bash www-data
+RUN groupmod -g $GROUP_ID www-data
+
+COPY docker/entrypoint.sh /usr/local/bin/
+RUN chown www-data /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+
+#** dev end
+
+
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["apache2-foreground"]

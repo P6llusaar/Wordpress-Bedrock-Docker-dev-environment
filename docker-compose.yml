@@ -1,0 +1,38 @@
+services:
+
+  bedrock-dev:
+    build: 
+      context: .
+      dockerfile: ./docker/dockerfile
+      args:
+        #if you don't replace these values you'll end up with permission issues
+        USER_ID: ${HOST_USER_ID} #get it by running the following command in terminal: id -u
+        GROUP_ID: ${HOST_GROUP_ID} #get it by running the following command in terminal: id -g
+    restart: always
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    ports:
+      - ${HOST_PORT}:80
+      - 35729:35729
+    env_file: .env
+    volumes:
+      - ./bedrock:/var/www/html
+      - ./bedrock/web/app/mu-plugins:/var/www/html/web/app/original-mu-plugins
+      - ./mu-plugins:/var/www/html/web/app/mu-plugins
+      - ./tools:/tools
+      - ./dumps:/dumps
+
+  bedrock-dev-db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: wpdb
+      MYSQL_USER: wpdb
+      MYSQL_PASSWORD: letmein
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - bedrock-dev-db:/var/lib/mysql
+
+volumes:
+  bedrock-dev:
+  bedrock-dev-db:

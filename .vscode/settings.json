@@ -1,0 +1,17 @@
+{
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+          "path": "/bin/bash"
+        },
+        "docker": {
+          "path": "docker-compose",
+          "args": ["exec", "-u", "www-data", "-it", "bedrock-dev", "/bin/bash"],
+          "name": "docker"
+        },
+        "docker ROOT": {
+          "path": "docker-compose",
+          "args": ["exec", "-it", "bedrock-dev", "/bin/bash"]
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "docker",
+}
