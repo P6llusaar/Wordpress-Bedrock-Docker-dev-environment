@@ -22,7 +22,8 @@ I'm glad you asked :) .
 * A script to compile .po files into .mo and .json files when the translation is changed
 
 ### Installation
-1. Pull the project [I hope I won't forget to add the command]
+1. Pull the project `git clone https://github.com/P6llusaar/Wordpress-Bedrock-Docker-dev-environment.git bedrock-docker`
+1. (optional) Delete .git folder from the project folder to remove the local git repo. (Useful if you want to add the whole thing to your own git.)
 1. [Generate a new bedrock project](https://roots.io/bedrock/docs/installation/) at the root folder or copy over your existing project. NB! The bedrock folder has to be called bedrock!
 1. Make a copy of .env.example and call it just .env . **Keep in mind that the same .env file is used to configure both Docker and Bedrock.**
 1. If you're on windows, you can probably skip this and the next step. If you're on linux (probaly same for mac but not sure) run following commands in terminal to figure out what your user and group id-s are:
