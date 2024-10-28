@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
+cd /var/www/html
+composer install
+
 start_script() {
     local script="$1"
 
